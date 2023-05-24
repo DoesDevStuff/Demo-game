@@ -226,6 +226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b0dea0dd11c74468f328eedfea349c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveData: {fileID: 11400000, guid: 3e42542359a1d614782bdf6c8b6d3f43, type: 2}
+  currentVelocity: 4
 --- !u!114 &375859862
 MonoBehaviour:
   m_ObjectHideFlags: 0
