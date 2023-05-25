@@ -2,20 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 // https://docs.unity3d.com/ScriptReference/RequireComponent.html
 [RequireComponent(typeof(Rigidbody2D))]
 
-public class playerMove : MonoBehaviour
+public class CharMovement : MonoBehaviour
 {
-    private Rigidbody2D _rigidbody2D; // maybe protected could be better??
-
+    private Rigidbody2D _rigidbody2D;
+    
     [SerializeField]
     public SO_movedata moveData;
 
     [SerializeField]
     protected float currentVelocity = 4f;
     protected Vector2 moveDirection;
+
+    [SerializeField]
+    public UnityEvent<float> onSpeedChange;
+    
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -56,6 +61,12 @@ public class playerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        ///checks to see if anything is listening
+        /// if not null then we pass the current Velocity.
+        /// we only care what happens to character here and not the actu
+
+        onSpeedChange?.Invoke(currentVelocity);
+
         // based on earlier discussion with Dan
         _rigidbody2D.velocity = currentVelocity * moveDirection.normalized;
     }
