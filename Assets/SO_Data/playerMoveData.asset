@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: playerMoveData
   m_EditorClassIdentifier: 
   maximumVelocity: 4
-  accelerate: 20
-  decelerate: 20
+  accelerate: 50.3
+  decelerate: 50.6
