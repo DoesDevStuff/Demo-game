@@ -10,11 +10,15 @@ using UnityEngine.Events;
 public class CharInput : MonoBehaviour
 {
     private Camera _mainCamera;
+    private bool _shootButtonDown = false;
 
     [SerializeField]
     public UnityEvent<Vector2> onMoveKeyPressed;
     [SerializeField]
     public UnityEvent<Vector2> positionOfMouse;
+
+    public UnityEvent onShootKeyPressed;
+    public UnityEvent onShootKeyReleased;
 
     private void Awake()
     {
@@ -25,6 +29,29 @@ public class CharInput : MonoBehaviour
     {
         GetMoveInput();
         GetPositionOfMouse();
+        GetShootInput();
+    }
+
+    private void GetShootInput()
+    {
+       if (Input.GetAxisRaw("Shoot") > 0)
+        {
+            if(_shootButtonDown == false)
+            {
+                _shootButtonDown = true;
+                onShootKeyPressed?.Invoke(); // added listener
+            }
+            
+        }
+        else
+        {
+            if (_shootButtonDown)
+            {
+                _shootButtonDown = false;
+                onShootKeyReleased?.Invoke();
+            }
+            
+        }
     }
 
     private void GetPositionOfMouse()
