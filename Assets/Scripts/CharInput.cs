@@ -12,13 +12,17 @@ public class CharInput : MonoBehaviour
     private Camera _mainCamera;
     private bool _shootButtonDown = false;
 
-    [SerializeField]
-    public UnityEvent<Vector2> onMoveKeyPressed;
-    [SerializeField]
-    public UnityEvent<Vector2> positionOfMouse;
+    [field: SerializeField]
+    public UnityEvent<Vector2> onMoveKeyPressed { get; set; }
 
-    public UnityEvent onShootKeyPressed;
-    public UnityEvent onShootKeyReleased;
+    [field: SerializeField]
+    public UnityEvent<Vector2> positionOfMouse { get; set; }
+
+    [field: SerializeField]
+    public UnityEvent onShootKeyPressed { get; set; }
+
+    [field: SerializeField]
+    public UnityEvent onShootKeyReleased { get; set; }
 
     private void Awake()
     {
@@ -34,7 +38,7 @@ public class CharInput : MonoBehaviour
 
     private void GetShootInput()
     {
-       if (Input.GetAxisRaw("Shoot") > 0)
+       if (Input.GetAxisRaw("Fire1") > 0)
         {
             if(_shootButtonDown == false)
             {
@@ -45,7 +49,7 @@ public class CharInput : MonoBehaviour
         }
         else
         {
-            if (_shootButtonDown)
+            if (_shootButtonDown == true)
             {
                 _shootButtonDown = false;
                 onShootKeyReleased?.Invoke();

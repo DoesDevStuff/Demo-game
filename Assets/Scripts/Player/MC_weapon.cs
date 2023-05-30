@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MC_weapon : WeaponHandler
+public class MC_weapon : CharWeapon
 {
     
 }
