@@ -6067,40 +6067,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5c45386dfc54a47b10d08246b765d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootPoint: {fileID: 1692664777}
+  shootPoint: {fileID: 0}
   _gunAmmo: 10
-  weaponData: {fileID: 11400000, guid: 185bc9c5706195f409e6779f2d185720, type: 2}
+  weaponData: {fileID: 0}
   reloadGunCoroutine: 0
   <OnShooting>k__BackingField:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1414401031}
-        m_TargetAssemblyTypeName: WeaponAudio, Assembly-CSharp
-        m_MethodName: PlayShootBulletSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   <OnShootButNoAmmo>k__BackingField:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1414401031}
-        m_TargetAssemblyTypeName: WeaponAudio, Assembly-CSharp
-        m_MethodName: PlayOutOfBulletSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2064966569
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -52,8 +52,9 @@ public class CharWeapon : MonoBehaviour
 
     public void Shooting()
     {
-        if(weapon != null && flareGun != null)
+        if(weapon != null || flareGun != null)
         {
+            weapon.TryShooting();
             flareGun.TryShooting(); // checks that we have object of shooting in weapon. It checks if not null here
         }
         
@@ -61,7 +62,7 @@ public class CharWeapon : MonoBehaviour
 
     public void StopShooting()
     {
-        if (weapon != null && flareGun != null)
+        if (weapon != null || flareGun != null)
         {
             weapon.StopShooting();
             flareGun.StopShooting();
