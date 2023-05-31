@@ -9,6 +9,9 @@ public class SO_BulletData : ScriptableObject
     public GameObject bulletPrefab { get; set; }
 
     [field: SerializeField]
+    public GameObject flarePrefab { get; set; }
+
+    [field: SerializeField]
     [field: Range(1, 60)]
     public float BulletSpeed { get; set; }
 

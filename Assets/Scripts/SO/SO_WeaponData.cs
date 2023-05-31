@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "WeaponSO/weapontData")]
+[CreateAssetMenu(menuName = "WeaponSO/weaponData")]
 public class SO_WeaponData : ScriptableObject
 {
     [field: SerializeField]

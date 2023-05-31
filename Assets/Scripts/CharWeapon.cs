@@ -13,6 +13,9 @@ public class CharWeapon : MonoBehaviour
     [SerializeField]
     protected Weapon weapon;
 
+    [SerializeField]
+    protected FlareGun flareGun;
+
     private void Awake()
     {
         AssignPlayerWeapon();
@@ -22,6 +25,7 @@ public class CharWeapon : MonoBehaviour
     {
         weaponRenderer = GetComponentInChildren<WeaponRenderer>();
         weapon = GetComponentInChildren<Weapon>();
+        flareGun = GetComponentInChildren<FlareGun>();
     }
 
     public virtual void AimingWeapon(Vector2 mousePosition)
@@ -48,18 +52,19 @@ public class CharWeapon : MonoBehaviour
 
     public void Shooting()
     {
-        if(weapon != null)
+        if(weapon != null && flareGun != null)
         {
-            weapon.TryShooting(); // checks that we have object of shooting in weapon. It checks if not null here
+            flareGun.TryShooting(); // checks that we have object of shooting in weapon. It checks if not null here
         }
         
     }
 
     public void StopShooting()
     {
-        if (weapon != null)
+        if (weapon != null && flareGun != null)
         {
             weapon.StopShooting();
+            flareGun.StopShooting();
         }
     }   
 }
