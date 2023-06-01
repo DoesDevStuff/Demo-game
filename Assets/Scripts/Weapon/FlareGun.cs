@@ -1,15 +1,26 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using Random = UnityEngine.Random;
 
-// shoots bullets
-public class Weapon : MonoBehaviour
+public class FlareGun : MonoBehaviour
 {
+    // the flare gun needs a empty game object attached to player for it's script and a gameobject attached to that gameobject, representing the firing point
+    // the firing point must be called "FlareSpawnPoint"
+
+    [Header("Sticky")]
+    public bool shootStickyFlares;
+
     [SerializeField]
-    protected GameObject shootPoint;
+    protected GameObject FlareSpawnPoint;
+
+    [HideInInspector] public List<GameObject> spawnedFlares = new List<GameObject>();
+
+    [SerializeField]
+    protected int maxSpawnedFlares = 5;
+
+    [SerializeField]
+    protected float gunImpulsePower = 7f;
 
     [SerializeField]
     protected int _gunAmmo = 10;
@@ -48,6 +59,7 @@ public class Weapon : MonoBehaviour
     public void Start()
     {
         GunAmmo = weaponData.ammoCapacity; // start with full bullets
+        FlareSpawnPoint = transform.Find("FlareSpawnPoint").gameObject;
     }
 
     public void TryShooting()
@@ -67,19 +79,24 @@ public class Weapon : MonoBehaviour
 
     public void Update()
     {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            shootStickyFlares = !shootStickyFlares;
+        }
+
         UseWeapon();
     }
 
     private void UseWeapon()
     {
-        if(isShooting && reloadGunCoroutine == false)
+        if (isShooting && reloadGunCoroutine == false)
         {
-            if(GunAmmo > 0)
+            if (GunAmmo > 0)
             {
                 GunAmmo--;
                 OnShooting?.Invoke();
 
-                for(int i = 0; i < weaponData.GetNumberOfBulletsToSpawn(); i++)
+                for (int i = 0; i < weaponData.GetNumberOfBulletsToSpawn(); i++)
                 {
                     ShootBullets();
                 }
@@ -112,21 +129,44 @@ public class Weapon : MonoBehaviour
 
     private void ShootBullets()
     {
-        SpawnBullet(shootPoint.transform.position, CalculateShootAngle(shootPoint));
+        SpawnFlare(FlareSpawnPoint.transform.position, CalculateShootAngle(FlareSpawnPoint));
     }
 
-    private void SpawnBullet(Vector3 position, Quaternion rotation)
+    private void SpawnFlare(Vector3 position, Quaternion rotation)
     {
-        var bulletPrefab = Instantiate(weaponData.BulletData.bulletPrefab, position, rotation);
-        bulletPrefab.GetComponent<Bullet>().BulletData = weaponData.BulletData;
+        var instantiatedFlare = Instantiate(weaponData.BulletData.flarePrefab, position, rotation);
+        instantiatedFlare.GetComponent<Bullet>().BulletData = weaponData.BulletData;
+
+        Rigidbody2D flareRB2D = instantiatedFlare.GetComponent<Rigidbody2D>();
+        Flare flareScript = instantiatedFlare.GetComponent<Flare>();
+        flareScript.flareGunReference = this;
+
+        if (shootStickyFlares == true)
+        {
+            flareScript.stickyFlare = true;
+        }
+
+        spawnedFlares.Add(instantiatedFlare);
+        if (spawnedFlares.Count > maxSpawnedFlares)
+        {
+            Destroy(spawnedFlares[0]);
+            spawnedFlares.RemoveAt(0);
+        }
+        float rotationInRadians = gameObject.transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
+        float vectorX = Mathf.Cos(rotationInRadians);
+        float vectorY = Mathf.Sin(rotationInRadians);
+
+        Debug.Log(rotationInRadians);
+
+        flareRB2D.AddForce(new Vector2(vectorX, vectorY) * gunImpulsePower, ForceMode2D.Impulse);
+
     }
 
-    private Quaternion CalculateShootAngle(GameObject shootPoint)
+    private Quaternion CalculateShootAngle(GameObject FlareSpawnPoint)
     {
         float spreadAngle = Random.Range(-weaponData.BulletsSpreadAngle, weaponData.BulletsSpreadAngle);
         Quaternion bulletSpreadRotation = Quaternion.Euler(new Vector3(0, 0, spreadAngle));
 
-        return shootPoint.transform.rotation * bulletSpreadRotation; // adding two quaternions here
+        return FlareSpawnPoint.transform.rotation * bulletSpreadRotation; // adding two quaternions here
     }
-    
 }
