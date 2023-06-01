@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Flare : Bullet
 {
+    // the way bouncy flares work is with a circle cast that uses the reflection equation to bounce them on detection
+    // while in this state it also rotates to match its velocity
+    // after the flare has bounced more than the max bounces the raycast is disabled and a collider is attached to the flare
+
+    // sticky flares just parent themselves on hit
+    // they dont work properly if the object is scaled
+
     public bool stickyFlare = false;
     [HideInInspector] public FlareGun flareGunReference;
 

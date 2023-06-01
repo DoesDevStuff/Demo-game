@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 public class FlareGun : MonoBehaviour
 {
+    // the flare gun needs a empty game object attached to player for it's script and a gameobject attached to that gameobject, representing the firing point
+    // the firing point must be called "FlareSpawnPoint"
+
     [Header("Sticky")]
     public bool shootStickyFlares;
 
