@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Enemy : MonoBehaviour, IHittable
+public class Enemy : MonoBehaviour, IHittable, ICharacter
 {
     // reference to enemy Data SO
     [field: SerializeField]

@@ -6,8 +6,14 @@ using UnityEngine.Events;
 
 // https://docs.unity3d.com/Manual/UnityEvents.html
 
+/// <summary>
+/// This script handles the player input.
+/// I want to this in a similar fashion in the enemy but have it driven by the AI logic
+/// Looked at how to extract the properties and it seems like creating an interface for this is probably the best idea.
+/// That way player and enemy will have the same events.
+/// </summary>
 
-public class CharInput : MonoBehaviour
+public class CharInput : MonoBehaviour, ICharInput
 {
     private Camera _mainCamera;
     private bool _shootButtonDown = false;

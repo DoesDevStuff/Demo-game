@@ -4043,6 +4043,7 @@ GameObject:
   - component: {fileID: 1112125812}
   - component: {fileID: 1112125811}
   - component: {fileID: 1112125810}
+  - component: {fileID: 1112125814}
   m_Layer: 3
   m_Name: MC
   m_TagString: Untagged
@@ -4238,6 +4239,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1112125814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112125809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc489a63e012ee449d2f1c12b7de303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1353960897
 GameObject:
   m_ObjectHideFlags: 0
@@ -6112,6 +6125,7 @@ GameObject:
   - component: {fileID: 1567457901}
   - component: {fileID: 1567457904}
   - component: {fileID: 1567457905}
+  - component: {fileID: 1567457906}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -6262,6 +6276,55 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1567457906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567457900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ec5d74c42a2cb439559b73279367bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Target>k__BackingField: {fileID: 0}
+  <onMoveKeyPressed>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1567457901}
+        m_TargetAssemblyTypeName: CharMovement, Assembly-CSharp
+        m_MethodName: movePlayer
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  <onShootKeyPressed>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <onShootKeyReleased>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <positionOfMouse>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1876981966}
+        m_TargetAssemblyTypeName: CharLookDirection, Assembly-CSharp
+        m_MethodName: FaceDirection
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
