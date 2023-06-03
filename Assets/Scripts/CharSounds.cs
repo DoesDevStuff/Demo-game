@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharSounds : MonoBehaviour
+// inherit from Audio Player    
+public class CharSounds : AudioPlayer
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private AudioClip _hitFeedbackClip = null, _deathFeedbackClip = null, _detectedVoiceFeedbackClip = null;
+
+    public void PlayHitSound()
     {
-        
+        PlayClipWithRandomnisedPitch(_hitFeedbackClip);
+    }
+     
+    public void PlayDeathSound()
+    {
+        PlaySoundClip(_deathFeedbackClip);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayDetectedVoiceSound()
     {
-        
+        PlayClipWithRandomnisedPitch(_detectedVoiceFeedbackClip);
     }
 }
