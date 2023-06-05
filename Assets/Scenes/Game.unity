@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 89477741}
   - component: {fileID: 89477742}
+  - component: {fileID: 89477743}
   m_Layer: 6
   m_Name: Attack State
   m_TagString: Untagged
@@ -167,9 +168,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f255fd2b58b49404683565a5518ce068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _takeActions: []
+  _takeActions:
+  - {fileID: 89477743}
   _transitions:
   - {fileID: 1562192718}
+--- !u!114 &89477743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89477740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d16b18787f2f4409e2307775df82d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &173160862
 GameObject:
   m_ObjectHideFlags: 0
@@ -2428,6 +2442,7 @@ GameObject:
   - component: {fileID: 391001519}
   - component: {fileID: 391001520}
   - component: {fileID: 391001521}
+  - component: {fileID: 391001522}
   m_Layer: 6
   m_Name: Transitions to Chase
   m_TagString: Untagged
@@ -2463,6 +2478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <decisionsConsidered>k__BackingField:
   - {fileID: 391001521}
+  - {fileID: 391001522}
   <positiveOutput>k__BackingField: {fileID: 1433687434}
   <negativeOutput>k__BackingField: {fileID: 0}
 --- !u!114 &391001521
@@ -2478,6 +2494,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Distance>k__BackingField: 4.5
+--- !u!114 &391001522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391001518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1316786749f04647b6a61e75073c1de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Distance>k__BackingField: 4.5
+  _raycastMask:
+    serializedVersion: 2
+    m_Bits: 520
+  <onPlayerSpotted>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 739518558}
+        m_TargetAssemblyTypeName: CharSounds, Assembly-CSharp
+        m_MethodName: PlayDetectedVoiceSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &409881829
 GameObject:
   m_ObjectHideFlags: 0
@@ -6468,7 +6515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b69f47e3d3f8fb4dbec515f5237ed04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Distance>k__BackingField: 1.5
+  <Distance>k__BackingField: 0.8
 --- !u!1 &1567457900
 GameObject:
   m_ObjectHideFlags: 0
