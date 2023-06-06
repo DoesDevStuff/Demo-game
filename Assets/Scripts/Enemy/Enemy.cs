@@ -13,10 +13,25 @@ public class Enemy : MonoBehaviour, IHittable, ICharacter
     public int Health { get; set; } = 2;
 
     [field: SerializeField]
+    public EnemyAttacking enemyAttack { get; set; }
+
+    private bool _isEnemyDead = false;
+    private CharMovement _charMovement;
+
+    [field: SerializeField]
     public UnityEvent onGetHit { get; set; }
 
     [field: SerializeField]
     public UnityEvent onDead { get; set; }
+
+    private void Awake()
+    { // so now we can assign enemy attack by hand. Could also attach this to a weapon if i want that way it comes from a weapon and not the enemy
+        if(enemyAttack == null)
+        {
+            enemyAttack = GetComponent<EnemyAttacking>();
+        }
+        _charMovement = GetComponent<CharMovement>();
+    }
 
     private void Start()
     {
@@ -25,14 +40,18 @@ public class Enemy : MonoBehaviour, IHittable, ICharacter
 
     public void GetHit(int damage, GameObject givesDamage)
     {
-        Health--;
-        onGetHit?.Invoke();
-
-        if(Health <= 0)
+        if (_isEnemyDead == false)
         {
-            onDead?.Invoke();
-            //Destroy(gameObject);
-            StartCoroutine(WaitTillDead());
+            Health--;
+            onGetHit?.Invoke();
+
+            if (Health <= 0)
+            {
+                _isEnemyDead = true;
+                onDead?.Invoke();
+                //Destroy(gameObject);
+                StartCoroutine(WaitTillDead());
+            }
         }
     }
 
@@ -40,5 +59,16 @@ public class Enemy : MonoBehaviour, IHittable, ICharacter
     {
         yield return new WaitForSeconds(.6f);
         Destroy(gameObject);
+    }
+
+    // this will be attached to the onshoot event
+    public void PerformAttack()
+    {
+        // check enemy not dead
+
+        if(_isEnemyDead == false)
+        {
+            enemyAttack.EnemyAttack(enemyData.Damage);
+        }
     }
 }

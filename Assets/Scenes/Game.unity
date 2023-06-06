@@ -2442,7 +2442,6 @@ GameObject:
   - component: {fileID: 391001519}
   - component: {fileID: 391001520}
   - component: {fileID: 391001521}
-  - component: {fileID: 391001522}
   m_Layer: 6
   m_Name: Transitions to Chase
   m_TagString: Untagged
@@ -2478,7 +2477,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <decisionsConsidered>k__BackingField:
   - {fileID: 391001521}
-  - {fileID: 391001522}
   <positiveOutput>k__BackingField: {fileID: 1433687434}
   <negativeOutput>k__BackingField: {fileID: 0}
 --- !u!114 &391001521
@@ -2494,37 +2492,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Distance>k__BackingField: 4.5
---- !u!114 &391001522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 391001518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1316786749f04647b6a61e75073c1de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Distance>k__BackingField: 4.5
-  _raycastMask:
-    serializedVersion: 2
-    m_Bits: 520
-  <onPlayerSpotted>k__BackingField:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 739518558}
-        m_TargetAssemblyTypeName: CharSounds, Assembly-CSharp
-        m_MethodName: PlayDetectedVoiceSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &409881829
 GameObject:
   m_ObjectHideFlags: 0
@@ -4470,6 +4437,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bc489a63e012ee449d2f1c12b7de303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Health>k__BackingField: 8
+  <onDead>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 739518558}
+        m_TargetAssemblyTypeName: CharSounds, Assembly-CSharp
+        m_MethodName: PlayDeathSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  <onGetHit>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 739518558}
+        m_TargetAssemblyTypeName: CharSounds, Assembly-CSharp
+        m_MethodName: PlayHitSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1353960897
 GameObject:
   m_ObjectHideFlags: 0
@@ -6530,6 +6528,7 @@ GameObject:
   - component: {fileID: 1567457904}
   - component: {fileID: 1567457905}
   - component: {fileID: 1567457906}
+  - component: {fileID: 1567457907}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -6635,6 +6634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <enemyData>k__BackingField: {fileID: 11400000, guid: 23b8127d8f02f974f8a804653165e29c, type: 2}
   <Health>k__BackingField: 2
+  <enemyAttack>k__BackingField: {fileID: 0}
   <onGetHit>k__BackingField:
     m_PersistentCalls:
       m_Calls:
@@ -6720,7 +6720,19 @@ MonoBehaviour:
         m_CallState: 2
   <onShootKeyPressed>k__BackingField:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1567457905}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: PerformAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <onShootKeyReleased>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
@@ -6739,6 +6751,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1567457907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567457900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628310fced925d544926a5de75ed3ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <AttackDelay>k__BackingField: 1
 --- !u!1 &1692664777
 GameObject:
   m_ObjectHideFlags: 0

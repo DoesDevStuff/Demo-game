@@ -41,8 +41,11 @@ public class AILogic_Handler : MonoBehaviour, ICharInput
         {
             onMoveKeyPressed?.Invoke(Vector2.zero); // will constantly remind enemy to stop
         }
-        // else it will update the state and call any action on that state
-        currentState.UpdatingState();
+        else
+        {
+            // else it will update the state and call any action on that state
+            currentState.UpdatingState();
+        }
     }
 
     public void Attacking()
