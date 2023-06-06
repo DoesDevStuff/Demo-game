@@ -34,11 +34,23 @@ public class NormalBullet : Bullet
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        var enemy_hittable = collision.GetComponent<IHittable>();
+        enemy_hittable?.GetHit(BulletData.Damage, gameObject); // since the bullet is storing how much damage we are dealing
+
         if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
         {
             HitObstacle();
         }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            HitEnemy();
+        }
         Destroy(gameObject);
+    }
+
+    private void HitEnemy()
+    {
+        Debug.Log("Enemy Hit");
     }
 
     private void HitObstacle()
