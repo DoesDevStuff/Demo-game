@@ -20,14 +20,21 @@ public class Player : MonoBehaviour, ICharacter, IHittable
     {
         if(_isDead == false)
         {
-            Health--;
+            Health -= damage;
             onGetHit?.Invoke();
             if(Health <= 0)
             {
                 onDead?.Invoke();
                 _isDead = true;
+                StartCoroutine(DeathCoroutine());
             }
         }
         //Debug.Log("Player is Hit");
+    }
+
+    IEnumerator DeathCoroutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+        Destroy(gameObject);
     }
 }
