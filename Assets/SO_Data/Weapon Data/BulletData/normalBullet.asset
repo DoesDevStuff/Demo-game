@@ -13,13 +13,17 @@ MonoBehaviour:
   m_Name: normalBullet
   m_EditorClassIdentifier: 
   <bulletPrefab>k__BackingField: {fileID: 6132939111151678297, guid: 2ada707b51b46a246945965f6fcae6d9, type: 3}
+  <flarePrefab>k__BackingField: {fileID: 0}
   <BulletSpeed>k__BackingField: 15
   <Damage>k__BackingField: 1
   <Friction>k__BackingField: 0.1
   <isBouncy>k__BackingField: 0
   <isGoThroughHittable>k__BackingField: 0
   <isRayCast>k__BackingField: 0
-  <ImpactObstaclePrefab>k__BackingField: {fileID: 0}
-  <ImpactEnemyPrefab>k__BackingField: {fileID: 0}
+  <ImpactObstaclePrefab>k__BackingField: {fileID: 8175543349530416974, guid: 10e37008c3da74b4aa17ddd6d82cee63, type: 3}
+  <ImpactEnemyPrefab>k__BackingField: {fileID: 4823777889927629268, guid: 30a4367e5a6f82b418114d88071fcaab, type: 3}
   <knockBackPower>k__BackingField: 4
   <KnockBackDelay>k__BackingField: 0.1
+  <BulletlayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 2560

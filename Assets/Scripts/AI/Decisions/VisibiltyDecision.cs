@@ -21,7 +21,7 @@ public class VisibiltyDecision : AIMakeDecisions
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Distance, _raycastMask);
 
-        if( (hit.collider != null) && (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player") ) )
+        if( hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Player")  )
         {
             onPlayerSpotted?.Invoke();
             return true;
