@@ -43,4 +43,7 @@ public class SO_BulletData : ScriptableObject
     [field: SerializeField]
     [field: Range(0.01f, 0.5f)]
     public float KnockBackDelay { get; set; } = 0.1f;
+
+    [field: SerializeField]
+    public LayerMask BulletlayerMask { get; set; }
 }

@@ -11,15 +11,15 @@ TagManager:
   - 
   - Water
   - UI
-  - Enemy
+  - 
+  - 
   - Player
+  - Enemy
   - Bullet
   - Obstacles
-  - PlayerMovementCollider
   - EnemyMovementCollider
-  - 
-  - 
-  - 
+  - PlayerMovementCollider
+  - Resource
   - 
   - 
   - 

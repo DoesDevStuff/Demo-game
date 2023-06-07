@@ -5,6 +5,7 @@ using UnityEngine;
 public class NormalBullet : Bullet
 {
     protected Rigidbody2D rgdbdy2d;
+    private bool isDead = false;
 
     // override Bullet data properties
 
@@ -34,27 +35,37 @@ public class NormalBullet : Bullet
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isDead) return;
+        isDead = true;
+
         var enemy_hittable = collision.GetComponent<IHittable>();
         enemy_hittable?.GetHit(BulletData.Damage, gameObject); // since the bullet is storing how much damage we are dealing
 
         if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
         {
-            HitObstacle();
+            HitObstacle(collision);
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            HitEnemy();
+            HitEnemy(collision);
         }
         Destroy(gameObject);
     }
 
-    private void HitEnemy()
+    private void HitEnemy(Collider2D collision)
     {
-        Debug.Log("Enemy Hit");
+        Vector2 randomOffset = Random.insideUnitCircle * 0.25f;
+        Instantiate(BulletData.ImpactEnemyPrefab, collision.transform.position + (Vector3)randomOffset, Quaternion.identity);
     }
 
-    private void HitObstacle()
+    private void HitObstacle(Collider2D collision)
     {
-        Debug.Log("Obstacle Hit");
+        // shoot raycast in direction of bullet and find closest point where bullet hits obstacle
+        // this is because our floor is one tilemap
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 1, BulletData.BulletlayerMask);
+        if(hit.collider != null)
+        {
+            Instantiate(BulletData.ImpactObstaclePrefab, hit.point, Quaternion.identity);
+        }
     }
 }
