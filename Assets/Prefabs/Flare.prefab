@@ -218,4 +218,4 @@ MonoBehaviour:
   bounceColliderRadius: 0.1
   bounceMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2048
