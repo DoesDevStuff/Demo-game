@@ -1298,7 +1298,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "41a56f3234322387b6a2cd352941f840",
     "m_Id": 0,
-    "m_DisplayName": "DissolveColor",
+    "m_DisplayName": "DissolveColour",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -2463,7 +2463,7 @@
     "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
     "m_ObjectId": "88f9a183250ee985a491c65f41fa48e2",
     "m_Id": 0,
-    "m_DisplayName": "MakeSolidColor",
+    "m_DisplayName": "MakeSolidColour",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -2818,7 +2818,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "acbbdf204d46c18a84d53774ec0a46be",
     "m_Id": 0,
-    "m_DisplayName": "SolidColor",
+    "m_DisplayName": "SolidColour",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -2894,7 +2894,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.05000000074505806,
+    "m_Value": 0.07999999821186066,
     "m_FloatType": 1,
     "m_RangeValues": {
         "x": 0.0,
@@ -3545,9 +3545,9 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "r": 0.6583749651908875,
-        "g": 0.07618539035320282,
-        "b": 0.08437621593475342,
+        "r": 0.0,
+        "g": 0.29177069664001467,
+        "b": 0.07227186113595963,
         "a": 1.0
     },
     "m_ColorMode": 1

@@ -50,16 +50,23 @@ public class Enemy : MonoBehaviour, IHittable, ICharacter
                 _isEnemyDead = true;
                 onDead?.Invoke();
                 //Destroy(gameObject);
-                StartCoroutine(WaitTillDead());
+                //StartCoroutine(WaitTillDead());
             }
         }
     }
 
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    /*
     IEnumerator WaitTillDead()
     {
         yield return new WaitForSeconds(.6f);
         Destroy(gameObject);
     }
+    */
 
     // this will be attached to the onshoot event
     public void PerformAttack()
