@@ -43,7 +43,7 @@ Material:
     - _NoiseScale: 20
     m_Colors:
     - _DissolveColor: {r: 0.046665095, g: 0.17144115, b: 0.07818743, a: 1}
-    - _DissolveColour: {r: 0.65837497, g: 0.07618539, b: 0.084376216, a: 1}
+    - _DissolveColour: {r: 0.9056604, g: 0.110288955, b: 0.046991818, a: 1}
     - _SolidColor: {r: 1, g: 1, b: 1, a: 0}
     - _SolidColour: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []

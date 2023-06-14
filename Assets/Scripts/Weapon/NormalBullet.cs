@@ -35,6 +35,7 @@ public class NormalBullet : Bullet
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // protects us from the instance of hitting two enemies at once
         if (isDead) return;
         isDead = true;
 
