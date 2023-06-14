@@ -4665,7 +4665,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4317056199857770361, guid: efbb789d784406c449ebdb365a13d7f6, type: 3}
   m_PrefabInstance: {fileID: 1153370925}
   m_PrefabAsset: {fileID: 0}
---- !u!43 &1249690152
+--- !u!43 &1310319499
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5837,7 +5837,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -5888,7 +5888,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1532184779}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
   m_Name: 
@@ -7427,8 +7427,8 @@ MonoBehaviour:
   - {x: -0.25307018, y: -0.33916682, z: 0}
   - {x: -0.28336012, y: -0.43717417, z: 0}
   m_ShapePathHash: -1791259548
-  m_Mesh: {fileID: 1249690152}
-  m_InstanceId: 18954
+  m_Mesh: {fileID: 1310319499}
+  m_InstanceId: 18958
 --- !u!1 &2064966566
 GameObject:
   m_ObjectHideFlags: 0
@@ -7608,10 +7608,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1106527584643279577, guid: 87a3db00e66c9884198525f5f3fc422d, type: 3}
-      propertyPath: _duration
-      value: 0.7
-      objectReference: {fileID: 0}
     - target: {fileID: 1240845510185752342, guid: 87a3db00e66c9884198525f5f3fc422d, type: 3}
       propertyPath: m_Mesh
       value: 

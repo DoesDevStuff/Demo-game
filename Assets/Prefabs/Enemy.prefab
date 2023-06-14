@@ -1370,7 +1370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 1240845510185752340}
-  _duration: 0.05
+  _duration: 1
   <onDeathCallback>k__BackingField:
     m_PersistentCalls:
       m_Calls:
