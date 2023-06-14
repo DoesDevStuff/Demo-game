@@ -13,7 +13,7 @@ using UnityEngine.Events;
 /// That way player and enemy will have the same events.
 /// </summary>
 
-public class CharInput : MonoBehaviour, ICharInput
+public class CharInput : MonoBehaviour, ICharInput, IDeathHandler
 {
     private Camera _mainCamera;
     private bool _shootButtonDown = false;
@@ -77,5 +77,10 @@ public class CharInput : MonoBehaviour, ICharInput
     { 
         // movement check, receives axis values from unity's input manager
         onMoveKeyPressed?.Invoke(new Vector2 (Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) ) ;
+    }
+
+    public void OnDeath()
+    {
+        enabled = false;
     }
 }

@@ -5,6 +5,5 @@ using UnityEngine.Events;
 
 public interface IHittable
 {
-    UnityEvent onGetHit { get; set; }
     void GetHit(int damage, GameObject givesDamage);
 }
