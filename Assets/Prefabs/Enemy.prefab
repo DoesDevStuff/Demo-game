@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8136894954874458152}
   - component: {fileID: 2685792487503178922}
+  - component: {fileID: 5479123796046324186}
   - component: {fileID: 468482613883278876}
   m_Layer: 9
   m_Name: FeedbackOnHit
@@ -47,6 +48,21 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 1240845510185752340}
   _flashTime: 0.02
   _flashMaterial: {fileID: 2100000, guid: 4189be417e9ab27468908efac771c300, type: 2}
+--- !u!114 &5479123796046324186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76971837414192789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd3059cf8f809f42a7043c186e8254a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _freezeTimeDelay: 0.005
+  _unfreezeTimeDelay: 0.02
+  _timeFreezeValue: 0.2
 --- !u!114 &468482613883278876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playFeedbackInList:
   - {fileID: 2685792487503178922}
+  - {fileID: 5479123796046324186}
 --- !u!1 &1240845508944020007
 GameObject:
   m_ObjectHideFlags: 0
