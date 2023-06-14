@@ -23,4 +23,9 @@ public class CharAnimation : MonoBehaviour
     {
         SetWalkAnim(speed > 0);
     }
+
+    public void PlayDeathAnimation()
+    {
+        playerAnimator.SetTrigger("Death");
+    }
 }

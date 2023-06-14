@@ -70,4 +70,10 @@ public class CharMovement : MonoBehaviour
         // based on earlier discussion with Dan
         _rigidbody2D.velocity = currentVelocity * moveDirection.normalized;
     }
+
+    public void StopInstantly()
+    {
+        currentVelocity = 0;
+        _rigidbody2D.velocity = Vector2.zero;
+    }
 }
