@@ -9,8 +9,10 @@ public class DisableOnDeath : MonoBehaviour, IDeathHandler
 
     public void OnDeath()
     {
-        _collider.enabled = false;
-        _renderer.enabled = false;
+        if(_collider)
+            _collider.enabled = false;
+        if(_renderer)
+            _renderer.enabled = false;
 
         StartCoroutine(DestroyAfterDelay());
     }
