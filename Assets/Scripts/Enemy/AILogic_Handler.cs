@@ -15,6 +15,7 @@ public class AILogic_Handler : MonoBehaviour, ICharInput
 
     [field: SerializeField]
     public AI_State currentState { get; set; }
+    public AI_State lastState { get; set; }
 
     [field: SerializeField]
     public UnityEvent<Vector2> onMoveKeyPressed { get; set; }
@@ -62,6 +63,7 @@ public class AILogic_Handler : MonoBehaviour, ICharInput
 
     internal void ChangingToState(AI_State state)
     {
+        lastState = currentState;
         currentState = state;
     }
 }

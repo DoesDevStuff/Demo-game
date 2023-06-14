@@ -8,9 +8,11 @@ public class AI_State : MonoBehaviour
     private AILogic_Handler _aiLogicHandling = null;
 
     [SerializeField]
-    private List<AITakeAction> _takeActions = null;
+    public List<AITakeAction> _takeActions = new List<AITakeAction>();
     [SerializeField]
-    private List<AITransitionState> _transitions = null;
+    public List<AITransitionState> _transitions = new List<AITransitionState>();
+
+    public AITransitionState lastTransition { get; set; }     
 
     private void Awake()
     {
@@ -41,6 +43,7 @@ public class AI_State : MonoBehaviour
             { // if all criteria are met i.e results for decisions are true
                 if (transition.positiveOutput != null)
                 {
+                    lastTransition = transition;
                     _aiLogicHandling.ChangingToState(transition.positiveOutput);
                     return;
                 }
@@ -51,6 +54,7 @@ public class AI_State : MonoBehaviour
             {
                 if (transition.negativeOutput != null)
                 {
+                    lastTransition = transition;
                     _aiLogicHandling.ChangingToState(transition.negativeOutput);
                     return;
                 }
