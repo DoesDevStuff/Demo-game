@@ -5272,9 +5272,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010630767, y: 0.06050062}
+  m_Offset: {x: 0.03614887, y: 0.06050062}
   serializedVersion: 2
-  m_Radius: 0.69885826
+  m_Radius: 0.90157
 --- !u!1001 &1153370925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8374,10 +8374,6 @@ PrefabInstance:
     - target: {fileID: 1240845510949957035, guid: 87a3db00e66c9884198525f5f3fc422d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1240845510949957044, guid: 87a3db00e66c9884198525f5f3fc422d, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87a3db00e66c9884198525f5f3fc422d, type: 3}
