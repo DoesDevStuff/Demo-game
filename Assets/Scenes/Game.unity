@@ -4531,8 +4531,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0035667934, y: -0.17866793}
-  m_Size: {x: 0.36447087, y: 0.15760778}
+  m_Offset: {x: 0.007402323, y: -0.48580727}
+  m_Size: {x: 0.61283296, y: 0.21245545}
   m_Direction: 1
 --- !u!1 &739518556
 GameObject:
@@ -5156,13 +5156,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bc489a63e012ee449d2f1c12b7de303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Health>k__BackingField: 8
+  <Health>k__BackingField: 20
   <onDead>k__BackingField:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 739518558}
         m_TargetAssemblyTypeName: CharSounds, Assembly-CSharp
         m_MethodName: PlayDeathSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2014171148}
+        m_TargetAssemblyTypeName: CharAnimation, Assembly-CSharp
+        m_MethodName: PlayDeathAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1112125811}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 420255918}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1724053676}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1112125810}
+        m_TargetAssemblyTypeName: CharMovement, Assembly-CSharp
+        m_MethodName: StopInstantly
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5212,9 +5272,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.010630767, y: 0.06050062}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.69885826
 --- !u!1001 &1153370925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8314,6 +8374,10 @@ PrefabInstance:
     - target: {fileID: 1240845510949957035, guid: 87a3db00e66c9884198525f5f3fc422d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1240845510949957044, guid: 87a3db00e66c9884198525f5f3fc422d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87a3db00e66c9884198525f5f3fc422d, type: 3}

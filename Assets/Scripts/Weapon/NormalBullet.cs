@@ -55,7 +55,10 @@ public class NormalBullet : Bullet
 
     private void HitEnemy(Collider2D collision)
     {
-        Vector2 randomOffset = Random.insideUnitCircle * 0.25f;
+        var knockback = collision.GetComponent<IKnockBack>();
+        knockback?.KnockBack(transform.right, BulletData.knockBackPower, BulletData.KnockBackDelay);
+
+        Vector2 randomOffset = Random.insideUnitCircle * 0.8f;
         Instantiate(BulletData.ImpactEnemyPrefab, collision.transform.position + (Vector3)randomOffset, Quaternion.identity);
     }
 

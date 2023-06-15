@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Enemy : MonoBehaviour, IHittable, ICharacter
+public class Enemy : MonoBehaviour, IHittable, ICharacter, IKnockBack
 {
     // reference to enemy Data SO
     [field: SerializeField]
@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour, IHittable, ICharacter
 
     private bool _isEnemyDead = false;
     private CharMovement _charMovement;
-
+    
     [field: SerializeField]
     public UnityEvent onGetHit { get; set; }
 
@@ -77,5 +77,10 @@ public class Enemy : MonoBehaviour, IHittable, ICharacter
         {
             enemyAttack.EnemyAttack(enemyData.Damage);
         }
+    }
+
+    public void KnockBack(Vector2 direction, float power, float duration)
+    {
+        _charMovement.KnockBack(direction, power, duration);
     }
 }
