@@ -86,7 +86,7 @@ public class CharMovement : MonoBehaviour
 
     public void KnockBack(Vector2 direction, float power, float duration)
     {
-        if(isKnockedBack == false)
+        if(isKnockedBack == false) //avoids cumulative knockback for enemy since it's driven by the coroutine
         {
             isKnockedBack = true;
             StartCoroutine(KnockBackCoroutine(direction, power, duration));
@@ -96,12 +96,13 @@ public class CharMovement : MonoBehaviour
     public void ResetKnockBack()
     {
         StopAllCoroutines();
+        StopCoroutine("KnockBackCoroutine");
         ResetKnockBackParameters();
     }
 
     IEnumerator KnockBackCoroutine(Vector2 direction, float power, float duration)
     {
-        _rigidbody2D.AddForce(moveDirection.normalized * power, ForceMode2D.Impulse);
+        _rigidbody2D.AddForce(-moveDirection.normalized * power, ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);
         ResetKnockBackParameters();
     }
