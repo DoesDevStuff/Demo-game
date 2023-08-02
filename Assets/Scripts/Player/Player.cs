@@ -5,16 +5,36 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour, ICharacter, IHittable
 {
-    [field: SerializeField]
-    public int Health { get; set; }
-
     private bool _isDead = false;
+
+    [SerializeField]
+    private int _maxHealth = 2;
+    private int _health;
+    
+    public int Health {
+        get => _health;
+        set
+        {
+            _health = Mathf.Clamp(value, 0, _maxHealth);
+            uiHealth.UpdateUI(_health);
+        }
+    }
+
+    [field: SerializeField]
+    public UIHealth uiHealth { get; set; }
 
     [field: SerializeField]
     public UnityEvent onDead { get; set; }
 
     [field: SerializeField]
     public UnityEvent onGetHit { get; set; }
+
+
+    private void Start()
+    {
+        Health = _maxHealth;
+        uiHealth.InitialiseLives(Health);
+    }
 
     public void GetHit(int damage, GameObject givesDamage)
     {
