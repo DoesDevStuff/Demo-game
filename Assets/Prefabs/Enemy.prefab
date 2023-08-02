@@ -394,6 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <decisionsConsidered>k__BackingField:
   - {fileID: 1240845509777480309}
+  - {fileID: 1240845509777480310}
   <positiveOutput>k__BackingField: {fileID: 1240845510816217678}
   <negativeOutput>k__BackingField: {fileID: 0}
 --- !u!114 &1240845509777480309
@@ -723,7 +724,7 @@ MonoBehaviour:
   - {x: -0.20945993, y: -0.15342872, z: 0}
   m_ShapePathHash: -688299368
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1294
+  m_InstanceId: 87244
 --- !u!1 &1240845510317057684
 GameObject:
   m_ObjectHideFlags: 0

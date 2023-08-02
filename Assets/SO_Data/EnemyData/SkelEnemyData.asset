@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SkelEnemyData
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 4
-  <Damage>k__BackingField: 2
+  <Damage>k__BackingField: 1
