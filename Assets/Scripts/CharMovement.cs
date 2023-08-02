@@ -18,6 +18,8 @@ public class CharMovement : MonoBehaviour
     protected float currentVelocity = 4f;
     protected Vector2 moveDirection;
 
+    protected bool isKnockedBack = false;
+
     [SerializeField]
     public UnityEvent<float> onSpeedChange;
     
@@ -25,6 +27,7 @@ public class CharMovement : MonoBehaviour
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
+
     public void movePlayer(Vector2 playerInput)
     {
         if(playerInput.magnitude > 0)
@@ -67,7 +70,47 @@ public class CharMovement : MonoBehaviour
 
         onSpeedChange?.Invoke(currentVelocity);
 
-        // based on earlier discussion with Dan
-        _rigidbody2D.velocity = currentVelocity * moveDirection.normalized;
+        if(isKnockedBack == false)
+        {
+            // based on earlier discussion with Dan
+            _rigidbody2D.velocity = currentVelocity * moveDirection.normalized;
+        }
+        
+    }
+
+    public void StopInstantly()
+    {
+        currentVelocity = 0;
+        _rigidbody2D.velocity = Vector2.zero;
+    }
+
+    public void KnockBack(Vector2 direction, float power, float duration)
+    {
+        if(isKnockedBack == false) //avoids cumulative knockback for enemy since it's driven by the coroutine
+        {
+            isKnockedBack = true;
+            StartCoroutine(KnockBackCoroutine(direction, power, duration));
+        }
+    }
+
+    public void ResetKnockBack()
+    {
+        StopAllCoroutines();
+        StopCoroutine("KnockBackCoroutine");
+        ResetKnockBackParameters();
+    }
+
+    IEnumerator KnockBackCoroutine(Vector2 direction, float power, float duration)
+    {
+        _rigidbody2D.AddForce(-moveDirection.normalized * power, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(duration);
+        ResetKnockBackParameters();
+    }
+
+    private void ResetKnockBackParameters()
+    {
+        currentVelocity = 0;
+        _rigidbody2D.velocity = Vector2.zero;
+        isKnockedBack = false;
     }
 }

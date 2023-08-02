@@ -24,17 +24,19 @@ public class Player : MonoBehaviour, ICharacter, IHittable
             onGetHit?.Invoke();
             if(Health <= 0)
             {
-                onDead?.Invoke();
+                onDead?.Invoke(); // going to rely on onDead to take care of the player death anim
                 _isDead = true;
-                StartCoroutine(DeathCoroutine());
+                //StartCoroutine(DeathCoroutine());
             }
         }
         //Debug.Log("Player is Hit");
     }
 
+    /*
     IEnumerator DeathCoroutine()
     {
         yield return new WaitForSeconds(0.2f);
         Destroy(gameObject);
     }
+    */
 }
