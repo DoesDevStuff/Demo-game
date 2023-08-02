@@ -78,6 +78,55 @@ MonoBehaviour:
   _playFeedbackInList:
   - {fileID: 2685792487503178922}
   - {fileID: 5479123796046324186}
+--- !u!1 &640404713970926191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3711246030510134512}
+  - component: {fileID: 8603964064864627770}
+  m_Layer: 9
+  m_Name: ItemDropper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3711246030510134512
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640404713970926191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1240845510949957035}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8603964064864627770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640404713970926191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24897c7962a89be4ba92c7cbb889e4d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemsToDrop:
+  - rate: 1
+    itemPrefab: {fileID: 5042623235591345221, guid: cf6be5bd6dc604f479acbc103109b028, type: 3}
+  - rate: 0.6
+    itemPrefab: {fileID: 5318488560528654765, guid: e912b587270656d4699f549c9784d20f, type: 3}
+  _dropChance: 0.5
 --- !u!1 &1240845508944020007
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,6 +443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <decisionsConsidered>k__BackingField:
   - {fileID: 1240845509777480309}
+  - {fileID: 1240845509777480310}
   <positiveOutput>k__BackingField: {fileID: 1240845510816217678}
   <negativeOutput>k__BackingField: {fileID: 0}
 --- !u!114 &1240845509777480309
@@ -723,7 +773,7 @@ MonoBehaviour:
   - {x: -0.20945993, y: -0.15342872, z: 0}
   m_ShapePathHash: -688299368
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1294
+  m_InstanceId: 97284
 --- !u!1 &1240845510317057684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,6 +1167,7 @@ Transform:
   - {fileID: 1240845509701312431}
   - {fileID: 8136894954874458152}
   - {fileID: 5799158718568059662}
+  - {fileID: 3711246030510134512}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1258,6 +1309,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1737635567289251086}
         m_TargetAssemblyTypeName: FeedbackPlayer, Assembly-CSharp
         m_MethodName: PlayFeedBack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8603964064864627770}
+        m_TargetAssemblyTypeName: ItemDropper, Assembly-CSharp
+        m_MethodName: DropItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

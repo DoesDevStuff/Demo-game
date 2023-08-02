@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bef74b4859c57b4b9b7a5d22e598ab0, type: 3}
-  m_Name: SkelEnemyData
+  m_Script: {fileID: 11500000, guid: 571a6c131712ab242aa5b4b7905bd08d, type: 3}
+  m_Name: AmmoResourceData
   m_EditorClassIdentifier: 
-  <MaxHealth>k__BackingField: 4
-  <Damage>k__BackingField: 1
+  _minAmount: 10
+  _maxAmount: 30
+  <ResourceType>k__BackingField: 2

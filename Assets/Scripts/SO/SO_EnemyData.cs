@@ -11,5 +11,5 @@ public class SO_EnemyData : ScriptableObject
     public int MaxHealth { get; set; } = 4;
 
     [field: SerializeField]
-    public int Damage { get; set; } = 2;
+    public int Damage { get; set; } = 1;
 }
