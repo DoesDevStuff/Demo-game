@@ -1,6 +1,8 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // https://docs.unity3d.com/ScriptReference/Cursor.SetCursor.html
 public class GameManager : MonoBehaviour
@@ -22,5 +24,11 @@ public class GameManager : MonoBehaviour
     {
         Cursor.SetCursor(_cursorTexture, new Vector2(_cursorTexture.width / 2f, _cursorTexture.height / 2f),
             CursorMode.Auto);
+    }
+
+    public void RestartLevel()
+    {
+        DOTween.KillAll();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

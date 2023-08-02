@@ -38,6 +38,7 @@ public class FlareGun : MonoBehaviour
         set
         {
             _gunAmmo = Mathf.Clamp(value, 0, weaponData.ammoCapacity);
+            OnFlareAmmoChange?.Invoke(_gunAmmo);
         }
     }
 
@@ -55,6 +56,8 @@ public class FlareGun : MonoBehaviour
     [field: SerializeField]
     public UnityEvent OnShootButNoAmmo { get; set; }
 
+    [field: SerializeField]
+    public UnityEvent<int> OnFlareAmmoChange { get; set; }
 
     public void Start()
     {

@@ -27,6 +27,7 @@ public class Weapon : MonoBehaviour
         set
         {
             _gunAmmo = Mathf.Clamp(value, 0, weaponData.ammoCapacity);
+            OnAmmoChange?.Invoke(_gunAmmo);
         }
     }
 
@@ -44,6 +45,8 @@ public class Weapon : MonoBehaviour
     [field: SerializeField]
     public UnityEvent OnShootButNoAmmo { get; set; }
 
+    [field: SerializeField]
+    public UnityEvent<int> OnAmmoChange { get; set; }
 
     public void Start()
     {
