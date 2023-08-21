@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - groundTilemap
+  - decoration2Tilemap
+  - minimapTilemap
+  - collisionTilemap
+  - frontTilemap
+  - decoration1Tilemap
   layers:
   - Default
   - TransparentFX
@@ -20,7 +26,7 @@ TagManager:
   - EnemyMovementCollider
   - PlayerMovementCollider
   - Resource
-  - 
+  - Room
   - 
   - 
   - 
