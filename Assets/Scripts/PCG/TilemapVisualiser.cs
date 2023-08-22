@@ -31,6 +31,28 @@ public class TilemapVisualiser : MonoBehaviour
         int typeAsInt = Convert.ToInt32(binaryType, 2);
         TileBase tile = null;
 
+        if (WallTypesHelper.wallTop.Contains(typeAsInt))
+        {
+            tile = _wallTop;
+        }
+        else if (WallTypesHelper.wallSideRight.Contains(typeAsInt))
+        {
+            tile = _wallSideRight;
+        }
+        else if (WallTypesHelper.wallSideLeft.Contains(typeAsInt))
+        {
+            tile = _wallSiderLeft;
+        }
+        else if (WallTypesHelper.wallBottm.Contains(typeAsInt))
+        {
+            tile = _wallBottom;
+        }
+        else if (WallTypesHelper.wallFull.Contains(typeAsInt))
+        {
+            tile = _wallFull;
+        }
+
+
         if (tile != null)
             PaintSingleTile(_wallTilemap, tile, position);
     }
@@ -51,6 +73,39 @@ public class TilemapVisualiser : MonoBehaviour
     {
         int typeASInt = Convert.ToInt32(binaryType, 2);
         TileBase tile = null;
+
+        if (WallTypesHelper.wallInnerCornerDownLeft.Contains(typeASInt))
+        {
+            tile = _wallInnerCornerDownLeft;
+        }
+        else if (WallTypesHelper.wallInnerCornerDownRight.Contains(typeASInt))
+        {
+            tile = _wallInnerCornerDownRight;
+        }
+        else if (WallTypesHelper.wallDiagonalCornerDownLeft.Contains(typeASInt))
+        {
+            tile = _wallDiagonalCornerDownLeft;
+        }
+        else if (WallTypesHelper.wallDiagonalCornerDownRight.Contains(typeASInt))
+        {
+            tile = _wallDiagonalCornerDownRight;
+        }
+        else if (WallTypesHelper.wallDiagonalCornerUpRight.Contains(typeASInt))
+        {
+            tile = _wallDiagonalCornerUpRight;
+        }
+        else if (WallTypesHelper.wallDiagonalCornerUpLeft.Contains(typeASInt))
+        {
+            tile = _wallDiagonalCornerUpLeft;
+        }
+        else if (WallTypesHelper.wallFullEightDirections.Contains(typeASInt))
+        {
+            tile = _wallFull;
+        }
+        else if (WallTypesHelper.wallBottmEightDirections.Contains(typeASInt))
+        {
+            tile = _wallBottom;
+        }
 
         if (tile != null)
             PaintSingleTile(_wallTilemap, tile, position);
