@@ -48,7 +48,7 @@ MonoBehaviour:
   - minQuantity: 5
     maxQuantity: 12
     enemyPrefab: {fileID: 1240845510949957032, guid: 87a3db00e66c9884198525f5f3fc422d, type: 3}
-    enemySize: {x: 0, y: 0}
+    enemySize: {x: 1, y: 1}
   itemData:
   - minQuantity: 2
     maxQuantity: 8
