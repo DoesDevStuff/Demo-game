@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// https://learn.microsoft.com/en-us/dotnet/api/system.byte?view=net-7.0
 public static class WallTypesHelper
 {
     public static HashSet<int> wallTop = new HashSet<int>
