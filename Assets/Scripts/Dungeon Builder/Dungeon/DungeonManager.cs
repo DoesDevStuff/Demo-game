@@ -44,7 +44,7 @@ public class DungeonManager : SingletonMonobehaviour<DungeonManager>
 
     private void PlayDungeonLevel(int dungeonLevelListIndex)
     {
-        bool dungeonBuiltSucessfully = DungeonBuilder.Instance.GenerateDungeon(_dungeonLevelList[dungeonLevelListIndex]);
+        bool dungeonBuiltSucessfully = false; //DungeonBuilder.Instance.GenerateDungeon(_dungeonLevelList[dungeonLevelListIndex]);
 
         if (!dungeonBuiltSucessfully)
         {
