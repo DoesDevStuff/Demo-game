@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room : MonoBehaviour
+public class Room
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string id;
+    public string templateID;
+    public GameObject prefab;
+    public RoomNodeTypeSO roomNodeType;
+    
+    public Vector2Int lowerBounds;
+    public Vector2Int upperBounds;
+    public Vector2Int templateLowerBounds;
+    public Vector2Int templateUpperBounds;
+    public Vector2Int[] spawnPositionArray;
+    public List<string> childRoomIDList;
+    public string parentID;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public InstantiatedRoom instantiatedRoom;
 }
