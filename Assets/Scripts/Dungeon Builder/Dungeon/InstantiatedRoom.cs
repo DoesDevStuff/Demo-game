@@ -41,4 +41,9 @@ public class InstantiatedRoom : MonoBehaviour
             StaticEventHandler.CallRoomChangedEvent(room);
         }
     }
+
+    public void Initialise(GameObject roomGameObject)
+    {
+        // add doors to room, block off unused doorways, populate the tilemap, create obstacles, disable collision
+    }
 }

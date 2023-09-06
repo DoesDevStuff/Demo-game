@@ -21,6 +21,7 @@ public class Room
 
     public bool isClearOfEnemies = false;
     public bool isPreviouslyVisited = false;
+    public bool isPositioned = false;
 
     public Room()
     {
