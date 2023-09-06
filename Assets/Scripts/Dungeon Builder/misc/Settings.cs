@@ -5,6 +5,9 @@ using System;
 
 public static class Settings
 {
+    public const float pixelsPerUnit = 16f;
+    public const float tileSizePixels = 16f;
+
     #region DUNGEON BUILD SETTINGS    
     public const int maxDungeonRebuildAttemptsForRoomGraph = 1000;
     public const int maxDungeonBuildAttempts = 10;
@@ -26,5 +29,6 @@ public static class Settings
 
     #region GAMEOBJECT TAGS
     public const string playerTag = "Player";
+    public const string playerWeapon = "playerWeapon";
     #endregion
 }

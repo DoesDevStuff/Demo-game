@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // https://docs.unity3d.com/ScriptReference/Cursor.SetCursor.html
-public class GameManager : MonoBehaviour
+public class CursorManager : MonoBehaviour
 {
     [SerializeField]
     private Texture2D _cursorTexture = null;

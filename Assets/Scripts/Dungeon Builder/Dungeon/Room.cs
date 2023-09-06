@@ -18,4 +18,25 @@ public class Room
     public string parentID;
 
     public InstantiatedRoom instantiatedRoom;
+
+    public bool isClearOfEnemies = false;
+    public bool isPreviouslyVisited = false;
+
+    public Room()
+    {
+        childRoomIDList = new List<string>();
+        // doorway?
+    }
+
+    // TO DO
+
+    /// <summary>
+    /// Get the number of enemies to spawn for this room in this dungeon level
+    /// </summary>
+    /// 
+
+    /// <summary>
+    /// Get the room enemy spawn parameters for this dungeon level - if none found then return null
+    /// </summary>
+
 }

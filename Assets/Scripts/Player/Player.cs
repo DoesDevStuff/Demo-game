@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(DestroyedEvent))]
+
 public class Player : MonoBehaviour, ICharacter, IHittable
 {
+    [HideInInspector] public DestroyedEvent destroyedEvent;
     private bool _isDead = false;
 
     [SerializeField]
@@ -29,7 +32,10 @@ public class Player : MonoBehaviour, ICharacter, IHittable
     [field: SerializeField]
     public UnityEvent onGetHit { get; set; }
 
-
+    private void Awake()
+    {
+        destroyedEvent = GetComponent<DestroyedEvent>();
+    }
     private void Start()
     {
         Health = _maxHealth;
@@ -44,9 +50,11 @@ public class Player : MonoBehaviour, ICharacter, IHittable
             onGetHit?.Invoke();
             if(Health <= 0)
             {
+
                 onDead?.Invoke(); // going to rely on onDead to take care of the player death anim
                 _isDead = true;
                 //StartCoroutine(DeathCoroutine());
+                destroyedEvent.CallDestroyedEvent(true, 0);
             }
         }
         //Debug.Log("Player is Hit");
