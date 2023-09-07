@@ -31,4 +31,10 @@ public static class Settings
     public const string playerTag = "Player";
     public const string playerWeapon = "playerWeapon";
     #endregion
+
+    #region ANIMATOR PARAMETERS
+    // Animator parameters - Door
+    public static int open = Animator.StringToHash("open");
+    public static int use = Animator.StringToHash("use");
+    #endregion
 }

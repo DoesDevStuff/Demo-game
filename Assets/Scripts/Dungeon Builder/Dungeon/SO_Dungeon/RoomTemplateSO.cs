@@ -24,6 +24,8 @@ public class RoomTemplateSO : MonoBehaviour
 
     [HideInInspector] public GameObject previousPrefab; // this is used to regenerate the guid if the scriptable object is copied and the prefab is changed
 
+    // possibly have music here??
+
     #region Header ROOM CONFIGURATION
 
     [Space(10)]
@@ -55,7 +57,31 @@ public class RoomTemplateSO : MonoBehaviour
 
     public Vector2Int upperBounds;
 
-    // TO DO: 
-    // Doorways
-    // Enemy and possibly items spawn
+    #region Tooltip
+
+    [Tooltip("There should be a maximum of four doorways for a room - one for each compass direction.  These should have a consistent 3 tile opening size, with the middle tile position being the doorway coordinate 'position'")]
+
+    #endregion Tooltip
+
+    [SerializeField] public List<Doorway> doorwayList;
+
+    #region Tooltip
+
+    [Tooltip("Each possible spawn position (used for enemies and chests) for the room in tilemap coordinates should be added to this array")]
+
+    #endregion Tooltip
+
+    public Vector2Int[] spawnPositionArray;
+
+    // TO DO:
+    //enemiesByLevelList;
+    //roomEnemySpawnParametersList;
+
+    /// <summary>
+    /// Returns the list of Entrances for the room template
+    /// </summary>
+    public List<Doorway> GetDoorwayList()
+    {
+        return doorwayList;
+    }
 }

@@ -159,9 +159,9 @@ public class DungeonBuilder : SingletonMonobehaviour<DungeonBuilder>
             // if the room is the entrance mark as positioned and add to room dictionary
             if (roomNode.roomNodeType.isEntrance)
             {
-                RoomTemplateSO roomTemplate = GetRandomRoomTemplate(roomNode.roomNodeType);
+               RoomTemplateSO roomTemplate = GetRandomRoomTemplate(roomNode.roomNodeType);
 
-                Room room = CreateRoomFromRoomTemplate(roomTemplate, roomNode);
+               Room room = CreateRoomFromRoomTemplate(roomTemplate, roomNode);
 
                 room.isPositioned = true;
 
@@ -176,12 +176,124 @@ public class DungeonBuilder : SingletonMonobehaviour<DungeonBuilder>
                 Room parentRoom = dungeonBuilderRoomDictionary[roomNode.parentRoomNodeIDList[0]];
 
                 // See if room can be placed without overlaps
-                noRoomOverlaps = CanPlaceRoomWithNoOverlaps(roomNode, parentRoom);
+                //noRoomOverlaps = CanPlaceRoomWithNoOverlaps(roomNode, parentRoom);
             }
 
         }
 
         return noRoomOverlaps;
+    }
+
+    /// <summary>
+    /// Get a random room template from the roomtemplatelist that matches the roomType and return it
+    /// (return null if no matching room templates found).
+    /// </summary>
+    private RoomTemplateSO GetRandomRoomTemplate(RoomNodeTypeSO roomNodeType)
+    {
+        List<RoomTemplateSO> matchingRoomTemplateList = new List<RoomTemplateSO>();
+
+        // Loop through room template list
+        foreach (RoomTemplateSO roomTemplate in _roomTemplateList)
+        {
+            // Add matching room templates
+            if (roomTemplate.roomNodeType == roomNodeType)
+            {
+                matchingRoomTemplateList.Add(roomTemplate);
+            }
+        }
+
+        // Return null if list is zero
+        if (matchingRoomTemplateList.Count == 0)
+            return null;
+
+        // Select random room template from list and return
+        return matchingRoomTemplateList[UnityEngine.Random.Range(0, matchingRoomTemplateList.Count)];
+
+    }
+
+    /// <summary>
+    /// Create room based on roomTemplate and layoutNode, and return the created room
+    /// </summary>
+    private Room CreateRoomFromRoomTemplate(RoomTemplateSO roomTemplate, RoomNodeSO roomNode)
+    {
+        // Initialise room from template
+        Room room = new Room();
+
+        room.templateID = roomTemplate.guid;
+        room.id = roomNode.id;
+        room.prefab = roomTemplate.prefab;
+        room.roomNodeType = roomTemplate.roomNodeType;
+        
+        room.lowerBounds = roomTemplate.lowerBounds;
+        room.upperBounds = roomTemplate.upperBounds;
+        room.spawnPositionArray = roomTemplate.spawnPositionArray;
+        room.templateLowerBounds = roomTemplate.lowerBounds;
+        room.templateUpperBounds = roomTemplate.upperBounds;
+        // get enemies from room template once we set that up
+       // and same with room Enemy Spawn Parameters List;
+        room.childRoomIDList = CopyStringList(roomNode.childRoomNodeIDList);
+        room.doorwayList = CopyDoorwayList(roomTemplate.doorwayList);
+
+        // Set parent ID for room
+        if (roomNode.parentRoomNodeIDList.Count == 0) // Entrance
+        {
+            room.parentID = "";
+            room.isPreviouslyVisited = true;
+
+            GameManager.Instance.SetCurrentRoom(room);
+        }
+        else
+        {
+            room.parentID = roomNode.parentRoomNodeIDList[0];
+        }
+
+        //TO DO
+        // If there are no enemies to spawn then default the room to be clear of enemies
+        
+
+        return room;
+
+    }
+
+    /// <summary>
+    /// Create deep copy of string list
+    /// </summary>
+    private List<string> CopyStringList(List<string> oldStringList)
+    {
+        List<string> newStringList = new List<string>();
+
+        foreach (string stringValue in oldStringList)
+        {
+            newStringList.Add(stringValue);
+        }
+
+        return newStringList;
+    }
+
+    // <summary>
+    /// Create deep copy of doorway list
+    /// </summary>
+    private List<Doorway> CopyDoorwayList(List<Doorway> oldDoorwayList)
+    {
+        List<Doorway> newDoorwayList = new List<Doorway>();
+
+        foreach (Doorway doorway in oldDoorwayList)
+        {
+            Doorway newDoorway = new Doorway();
+
+            newDoorway.position = doorway.position;
+            newDoorway.orientation = doorway.orientation;
+            newDoorway.doorPrefab = doorway.doorPrefab;
+            newDoorway.isConnected = doorway.isConnected;
+            newDoorway.isUnavailable = doorway.isUnavailable;
+            newDoorway.doorwayStartCopyPosition = doorway.doorwayStartCopyPosition;
+            newDoorway.doorwayCopyTileWidth = doorway.doorwayCopyTileWidth;
+            newDoorway.doorwayCopyTileHeight = doorway.doorwayCopyTileHeight;
+
+            newDoorwayList.Add(newDoorway);
+        }
+
+        return newDoorwayList;
     }
 
     /// <summary>

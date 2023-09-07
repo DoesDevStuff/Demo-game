@@ -10,6 +10,7 @@ TagManager:
   - collisionTilemap
   - frontTilemap
   - decoration1Tilemap
+  - behindTilemap
   layers:
   - Default
   - TransparentFX

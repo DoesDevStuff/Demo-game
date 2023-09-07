@@ -17,6 +17,8 @@ public class Room
     public List<string> childRoomIDList;
     public string parentID;
 
+    public List<Doorway> doorwayList;
+
     public InstantiatedRoom instantiatedRoom;
 
     public bool isClearOfEnemies = false;
@@ -26,7 +28,7 @@ public class Room
     public Room()
     {
         childRoomIDList = new List<string>();
-        // doorway?
+        doorwayList = new List<Doorway>();
     }
 
     // TO DO
