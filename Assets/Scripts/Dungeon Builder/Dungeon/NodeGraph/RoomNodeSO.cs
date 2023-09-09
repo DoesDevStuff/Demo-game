@@ -59,8 +59,9 @@ public class RoomNodeSO : ScriptableObject
 
             roomNodeType = roomNodeTypeList.list[selection];
 
-            if (roomNodeTypeList.list[selected].isPassage && !roomNodeTypeList.list[selection].isPassage || !roomNodeTypeList.list[selected].isPassage 
-                && roomNodeTypeList.list[selection].isPassage || !roomNodeTypeList.list[selected].isBossRoom && roomNodeTypeList.list[selection].isBossRoom)
+            if (roomNodeTypeList.list[selected].isPassage && !roomNodeTypeList.list[selection].isPassage || 
+                !roomNodeTypeList.list[selected].isPassage && roomNodeTypeList.list[selection].isPassage || 
+                !roomNodeTypeList.list[selected].isBossRoom && roomNodeTypeList.list[selection].isBossRoom)
             {
                 if (childRoomNodeIDList.Count > 0)
                 {
@@ -238,25 +239,23 @@ public class RoomNodeSO : ScriptableObject
         if (roomNodeGraph.GetRoomNode(childID).parentRoomNodeIDList.Count > 0)
             return false;
 
-        // If child is corridor and this node is a corridor return false
+        // If child is passage and this node is a passage return false
         if (roomNodeGraph.GetRoomNode(childID).roomNodeType.isPassage && roomNodeType.isPassage)
             return false;
 
-        // If child is not a corridor and this node is not a corridor return false
+        // If child is not a passage and this node is not a passage return false
         if (!roomNodeGraph.GetRoomNode(childID).roomNodeType.isPassage && !roomNodeType.isPassage)
             return false;
 
-        // If adding a corridor check that this node has < the maximum permitted child corridors
+        // If adding a passage check that this node has < the maximum permitted child passages
         if (roomNodeGraph.GetRoomNode(childID).roomNodeType.isPassage && childRoomNodeIDList.Count >= Settings.maxChildPassages)
-        {
             return false;
-        }
 
         // If the child room is an entance return false - the entrance must always be the top level parent node
         if (roomNodeGraph.GetRoomNode(childID).roomNodeType.isEntrance)
             return false;
 
-        // If adding a room node to a corridor check that this corridor node doesn't already have a room added
+        // If adding a room node to a passage check that this passage node doesn't already have a room added
         if (!roomNodeGraph.GetRoomNode(childID).roomNodeType.isPassage && childRoomNodeIDList.Count > 0)
             return false;
 

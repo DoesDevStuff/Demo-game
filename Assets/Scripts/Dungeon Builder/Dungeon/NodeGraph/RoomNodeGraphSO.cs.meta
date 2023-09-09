@@ -3,7 +3,9 @@ guid: 25ca7903c4912a1438a0c086bbd8d692
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - roomNodeTypeList: {fileID: 11400000, guid: 28448990811c38745a21360f94bc7ff4, type: 2}
+  - roomNodeToDrawLineFrom: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
