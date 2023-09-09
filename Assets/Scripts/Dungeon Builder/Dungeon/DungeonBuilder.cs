@@ -3,6 +3,10 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+// https://www.geeksforgeeks.org/difference-between-shallow-and-deep-copy-of-a-class/
+// Creating deep copies for the door list
+// https://stackoverflow.com/questions/14007405/how-create-a-new-deep-copy-clone-of-a-listt
+
 [DisallowMultipleComponent]
 public class DungeonBuilder : SingletonMonobehaviour<DungeonBuilder>
 {
@@ -156,7 +160,7 @@ public class DungeonBuilder : SingletonMonobehaviour<DungeonBuilder>
             {
                 openRoomNodeQueue.Enqueue(childRoomNode);
             }
-            // if the room is the entrance mark as positioned and add to room dictionary
+            // if the room is the entrance then we mark it as positioned and add to room dictionary
             if (roomNode.roomNodeType.isEntrance)
             {
                RoomTemplateSO roomTemplate = GetRandomRoomTemplate(roomNode.roomNodeType);
@@ -176,12 +180,297 @@ public class DungeonBuilder : SingletonMonobehaviour<DungeonBuilder>
                 Room parentRoom = dungeonBuilderRoomDictionary[roomNode.parentRoomNodeIDList[0]];
 
                 // See if room can be placed without overlaps
-                //noRoomOverlaps = CanPlaceRoomWithNoOverlaps(roomNode, parentRoom);
+                noRoomOverlaps = CanPlaceRoomWithNoOverlaps(roomNode, parentRoom);
             }
 
         }
 
         return noRoomOverlaps;
+    }
+
+    ///<summary>
+    ///Attempt to place the room node in the dungeon
+    /// So here we check if the room can be placed with no overlap otherwise we return null
+    ///</summary>
+    private bool CanPlaceRoomWithNoOverlaps(RoomNodeSO roomNode, Room parentRoom)
+    {
+
+        // initialise and assume overlap until proven otherwise.
+        bool roomOverlaps = true;
+
+        // Do While Room Overlaps - try to place against all available doorways of the parent until
+        // the room is successfully placed without overlap.
+        while (roomOverlaps)
+        {
+            // Select random unconnected available doorway for Parent
+            List<Doorway> unconnectedAvailableParentDoorways = GetUnconnectedAvailableDoorways(parentRoom.doorwayList).ToList();
+
+            if (unconnectedAvailableParentDoorways.Count == 0)
+            {
+                // If no more doorways to try then overlap failure.
+                return false; // room overlaps
+            }
+
+            Doorway doorwayParent = unconnectedAvailableParentDoorways[UnityEngine.Random.Range(0, unconnectedAvailableParentDoorways.Count)];
+
+            // Get a random room template for room node that is consistent with the parent door orientation
+            RoomTemplateSO roomtemplate = GetRandomTemplateForRoomConsistentWithParent(roomNode, doorwayParent);
+
+            // Create a room
+            Room room = CreateRoomFromRoomTemplate(roomtemplate, roomNode);
+
+            // Place the room - returns true if the room doesn't overlap
+            if (PlaceTheRoom(parentRoom, doorwayParent, room))
+            {
+                // If room doesn't overlap then set to false to exit while loop
+                roomOverlaps = false;
+
+                // Mark room as positioned
+                room.isPositioned = true;
+
+                // Add room to dictionary
+                dungeonBuilderRoomDictionary.Add(room.id, room);
+
+            }
+            else
+            {
+                roomOverlaps = true;
+            }
+
+        }
+
+        return true;  // no room overlaps
+
+    }
+
+    /// <summary>
+    /// Place the room - returns true if the room doesn't overlap, false otherwise
+    /// </summary>
+    private bool PlaceTheRoom(Room parentRoom, Doorway doorwayParent, Room room)
+    {
+
+        // Get current room doorway position
+        Doorway doorway = GetOppositeDoorway(doorwayParent, room.doorwayList);
+
+        // Return if no doorway in room opposite to parent doorway
+        if (doorway == null)
+        {
+            // Just mark the parent doorway as unavailable so we don't try and connect it again
+            doorwayParent.isUnavailable = true;
+
+            return false;
+        }
+
+        // Calculate 'world' grid parent doorway position
+        Vector2Int parentDoorwayPosition = ((parentRoom.lowerBounds + doorwayParent.position) - parentRoom.templateLowerBounds);
+
+        Vector2Int adjustment = Vector2Int.zero;
+
+        // Calculate adjustment position offset based on room doorway position that we are trying to connect 
+        //(e.g. if this doorway is west then we need to add (1,0) to the east parent doorway)
+
+        switch (doorway.orientation)
+        {
+            case Orientation.north:
+                adjustment = new Vector2Int(0, -1);
+                break;
+
+            case Orientation.east:
+                adjustment = new Vector2Int(-1, 0);
+                break;
+
+            case Orientation.south:
+                adjustment = new Vector2Int(0, 1);
+                break;
+
+            case Orientation.west:
+                adjustment = new Vector2Int(1, 0);
+                break;
+
+            case Orientation.none:
+                break;
+
+            default:
+                break;
+        }
+
+        // Calculate room lower bounds and upper bounds based on positioning to align with parent doorway
+        room.lowerBounds = ((parentDoorwayPosition + adjustment + room.templateLowerBounds) - doorway.position);
+        room.upperBounds = ((room.lowerBounds + room.templateUpperBounds) - room.templateLowerBounds);
+
+        Room overlappingRoom = CheckForRoomOverlap(room);
+
+        if (overlappingRoom == null)
+        {
+            // mark doorways as connected & unavailable
+            doorwayParent.isConnected = true;
+            doorwayParent.isUnavailable = true;
+
+            doorway.isConnected = true;
+            doorway.isUnavailable = true;
+
+            // return true to show rooms have been connected with no overlap
+            return true;
+        }
+        else
+        {
+            // Just mark the parent doorway as unavailable so we don't try and connect it again
+            doorwayParent.isUnavailable = true;
+
+            return false;
+        }
+
+    }
+
+    /// <summary>
+    /// Check for rooms that overlap the upper and lower bounds parameters, 
+    /// and if there are overlapping rooms then return room else return null
+    /// </summary>
+    private Room CheckForRoomOverlap(Room roomToTest)
+    {
+        // Iterate through all rooms
+        foreach (KeyValuePair<string, Room> keyvaluepair in dungeonBuilderRoomDictionary)
+        {
+            Room room = keyvaluepair.Value;
+
+            // skip if same room as room to test or room hasn't been positioned
+            if (room.id == roomToTest.id || !room.isPositioned)
+                continue;
+
+            // If room overlaps
+            if (IsOverLappingRoom(roomToTest, room))
+            {
+                return room;
+            }
+        }
+
+
+        // Return
+        return null;
+
+    }
+
+    /// <summary>
+    /// Check if 2 rooms overlap each other - 
+    /// return true if they overlap or false if they don't overlap
+    /// </summary>
+    private bool IsOverLappingRoom(Room room1, Room room2)
+    {
+        bool isOverlappingX = IsOverLappingInterval(room1.lowerBounds.x, room1.upperBounds.x, room2.lowerBounds.x, room2.upperBounds.x);
+
+        bool isOverlappingY = IsOverLappingInterval(room1.lowerBounds.y, room1.upperBounds.y, room2.lowerBounds.y, room2.upperBounds.y);
+
+        if (isOverlappingX && isOverlappingY)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+
+    /// <summary>
+    /// Check if interval 1 overlaps interval 2 - 
+    /// this method is used by the IsOverlappingRoom method
+    /// </summary>
+    private bool IsOverLappingInterval(int imin1, int imax1, int imin2, int imax2)
+    {
+        if (Mathf.Max(imin1, imin2) <= Mathf.Min(imax1, imax2))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Get the doorway from the doorway list that has the opposite orientation to doorway
+    /// </summary>
+    private Doorway GetOppositeDoorway(Doorway parentDoorway, List<Doorway> doorwayList)
+    {
+
+        foreach (Doorway doorwayToCheck in doorwayList)
+        {
+            if (parentDoorway.orientation == Orientation.east && doorwayToCheck.orientation == Orientation.west)
+            {
+                return doorwayToCheck;
+            }
+            else if (parentDoorway.orientation == Orientation.west && doorwayToCheck.orientation == Orientation.east)
+            {
+                return doorwayToCheck;
+            }
+            else if (parentDoorway.orientation == Orientation.north && doorwayToCheck.orientation == Orientation.south)
+            {
+                return doorwayToCheck;
+            }
+            else if (parentDoorway.orientation == Orientation.south && doorwayToCheck.orientation == Orientation.north)
+            {
+                return doorwayToCheck;
+            }
+        }
+
+        return null;
+
+    }
+
+    /// <summary>
+    /// Get random room template for room node taking into account the parent doorway orientation.
+    /// </summary>
+    private RoomTemplateSO GetRandomTemplateForRoomConsistentWithParent(RoomNodeSO roomNode, Doorway doorwayParent)
+    {
+        RoomTemplateSO roomtemplate = null;
+
+        // If room node is a corridor then select random correct Corridor room template based on
+        // parent doorway orientation
+        if (roomNode.roomNodeType.isPassage)
+        {
+            switch (doorwayParent.orientation)
+            {
+                case Orientation.north:
+                case Orientation.south:
+                    roomtemplate = GetRandomRoomTemplate(_roomNodeTypeList.list.Find(x => x.isPassageNS));
+                    break;
+
+
+                case Orientation.east:
+                case Orientation.west:
+                    roomtemplate = GetRandomRoomTemplate(_roomNodeTypeList.list.Find(x => x.isPassageEW));
+                    break;
+
+
+                case Orientation.none:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        // Else select random room template
+        else
+        {
+            roomtemplate = GetRandomRoomTemplate(roomNode.roomNodeType);
+        }
+
+
+        return roomtemplate;
+    }
+
+    /// <summary>
+    /// Get unconnected doorways
+    /// </summary>
+    private IEnumerable<Doorway> GetUnconnectedAvailableDoorways(List<Doorway> roomDoorwayList)
+    {
+        // Loop through doorway list
+        foreach (Doorway doorway in roomDoorwayList)
+        {
+            if (!doorway.isConnected && !doorway.isUnavailable)
+                yield return doorway;
+        }
     }
 
     /// <summary>
@@ -327,6 +616,7 @@ public class DungeonBuilder : SingletonMonobehaviour<DungeonBuilder>
 
     /// <summary>
     /// Get a room template by room template ID, returns null if ID doesn't exist
+    /// https://thegamedev.guru/unity-c-sharp/out-parameters-7-0/#:~:text=C%23%20lets%20you%20use%20the,and%20set%20within%20that%20function.
     /// </summary>
     public RoomTemplateSO GetRoomTemplate(string roomTemplateID)
     {
